@@ -2,7 +2,7 @@
 Vue.component('post', {
   template: `<li class="list-group-item">
         <i class="glyphicon glyphicon-chevron-up" @click="upvote" ></i>
-        <span class="label label-primary">{{ votes }}</span>
+        <span class="label label-primary">{{ post.votes }}</span>
         <i class="glyphicon glyphicon-chevron-down" @click="downvote" ></i>
         <a>{{ post.title }}</a>
       </li>`,
@@ -15,24 +15,11 @@ Vue.component('post', {
   },
   methods: {
     upvote: function () {
-      this.upvoted =  true;
-      this.downvoted = false;
+      this.post.votes +=1;
       
     },
     downvote: function () {
-      this.downvoted = true;
-      this.upvoted = false;
-    }
-  },
-  computed: {
-    votes: function () {
-      if (this.upvoted) {
-        return this.post.votes + 1;
-      } else if (this.downvoted) {
-        return this.post.votes - 1;
-      } else {
-        return this.post.votes;
-      }
+      this.post.votes -=1;
     }
   }
 });
