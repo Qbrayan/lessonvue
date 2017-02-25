@@ -3,7 +3,7 @@
   <div class="row" >
     <div class="large-6 columns small-centered columns">
       <div class="signup-panel">
-        <p class="welcome"> Sign up using this form</p>
+        <p class="welcome"> Sign up to become a member</p>
         <form>
           <div class="row collapse">
             <div class="small-2 columns ">
@@ -39,7 +39,7 @@
 
 <script>
 
-// import VueResource from 'vue-resource'
+import Vue from 'vue'
 
 export default {
   data () {
@@ -52,7 +52,17 @@ export default {
     }
   },
   methods: {
-    signupUser () {}
+    signupUser () {
+      console.log(this.username, this.password)
+      Vue.http.post('http://test-routes.herokuapp.com/auth/register', this.user)
+      .then(function (response) {
+        console.log(response)
+        // localStorage.setItem ('token', response.data.token);
+        // console.log(localStorage.getItem('token'))
+      }, function (error) {
+      console.log('Please use correct details', error)
+       })
+    }
   },
   mounted () {
   }
